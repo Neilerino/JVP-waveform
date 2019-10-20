@@ -1,0 +1,14 @@
+.hamburger {
+    display: block;
+    margin-left: 0.5rem;
+    padding: 1.5rem;
+    background: url(../../../icons/menu.svg) no-repeat top left;
+    background-size: 3rem;
+    fill: white;
+    border-radius: 0.15rem;
+    cursor: pointer;
+}
+
+.hamburger:hover {
+    background-color: rgb(52, 81, 97);;
+}
