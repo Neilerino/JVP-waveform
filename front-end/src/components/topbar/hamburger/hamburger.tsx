@@ -17,4 +17,3 @@ const Hamburger: React.FC = () => {
 }
 
 export default Hamburger;
-
