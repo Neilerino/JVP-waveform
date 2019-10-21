@@ -3,6 +3,7 @@ from flask_socketio import SocketIO, send
 
 app = Flask(__name__)
 socket = SocketIO(app, cors_allowed_origins="*")
+# TODO: Add secret key
 
 @app.route('/')
 def index():
