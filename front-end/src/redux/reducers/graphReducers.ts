@@ -1,13 +1,12 @@
-// TODO: Define a type for action
-import { PlotParams } from './../../interfaces';
+// TODO: Fix the typing
 
-const graphReducer = (graphData: PlotParams, action: any) => {
-    if (graphData === undefined) {
-        graphData = {
+const graphReducer = (state: any, action: any) => {
+    if (state === undefined) {
+        state = {
             data: [
                 {
                     x: [ 0 ],
-                    y: [ new Date().getTime() ],
+                    y: [ 0 ],
                     type: 'scatter'
                 }
             ],
@@ -19,11 +18,11 @@ const graphReducer = (graphData: PlotParams, action: any) => {
 
     switch(action.type) {
         case('UPDATE'):
-            Array(graphData.data[0].x).push(action.value);
-            Array(graphData.data[0].y).push(action.time);
-            return graphData;
+            Array(state.data[0].x).push(action.data.value);
+            Array(state.data[0].y).push(action.data.time);
+            return state;
         default:
-            return graphData;
+            return state;
     }
 }
 

@@ -10,7 +10,8 @@
 }
 
 .page-title {
+    font-family: sans-serif;
     color: white;
     font-size: 1.75rem;
-    padding: 0.3rem 0.6rem 0.2rem 0;
+    padding: 0.5rem 0.6rem 0.2rem 0;
 }

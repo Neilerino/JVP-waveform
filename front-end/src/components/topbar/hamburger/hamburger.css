@@ -1,6 +1,6 @@
 .hamburger {
     display: block;
-    margin-left: 0.5rem;
+    margin-left: 0.1rem;
     padding: 1.5rem;
     background: url(../../../icons/menu.svg) no-repeat top left;
     background-size: 3rem;
