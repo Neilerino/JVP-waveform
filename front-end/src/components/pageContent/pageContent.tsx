@@ -6,6 +6,7 @@ const PageContent: React.FC = () => {
     return(
         <div className="page-content">
             <SideBar />
+            
         </div>
     );
 }
