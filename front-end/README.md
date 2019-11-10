@@ -1,5 +1,7 @@
 # Frontend code base for JVP-Analyzer project
 
+Requires Node Version greater than or equal to node 11
+
 ## Available Scripts
 
 In the project directory, you can run:
