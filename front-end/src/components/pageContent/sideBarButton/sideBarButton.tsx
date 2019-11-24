@@ -8,11 +8,25 @@ interface SideBarButtonProps extends React.Props<any> {
 
 const SideBarButton: React.FC<SideBarButtonProps> = ({ buttonType }) => {
 
-    const buttonAction = () => {
-        if (buttonType === 'collect') {
-            console.log('The button was clicked');
-        }
+    // Send an API call to the backend to start sending data
+    const collectData = async () => {
+        fetch('http://localhost:4000/collection/POST/start');
+        console.log('Starting Data Collection');
+    };
+
+    const stopData = async () => {
+        fetch('http://localhost:4000/collection/POST/stop')
+        console.log('Stopping collection')
     }
+
+    const buttonAction = async () => {
+        if (buttonType === 'collect') {
+            collectData();
+        }
+        if (buttonType === 'stop') {
+            stopData();
+        }
+    };
 
     let buttonString;
     if (buttonType === 'collect') {
@@ -25,6 +39,8 @@ const SideBarButton: React.FC<SideBarButtonProps> = ({ buttonType }) => {
         buttonString = 'Save Data'
     } else if (buttonType === 'help') {
         buttonString = 'Help';
+    } else {
+        buttonString = 'Stop'
     }
 
     return (
