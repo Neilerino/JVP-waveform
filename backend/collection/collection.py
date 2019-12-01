@@ -20,12 +20,12 @@ class Collection_Thread(Thread):
                     # call function to get data from micropocessor here,
                     #  for now I'll return a random number
                     data = {
-                        'data': randint(0, 100),
-                        'time': datetime.datetime.now()
+                        'value': randint(0, 100),
+                        'time': datetime.datetime.now().strftime("%H:%M:%S")
                     }
                     data_json = json.dumps(data, indent=4, sort_keys=True, default=str)
-                    socket.send(data_json, json=True)
-                    time.sleep(0.5)
+                    socket.emit('message', data_json)
+                    time.sleep(1)
         finally:
             print('Ending Thread Process')
             # send socket that recording has ended

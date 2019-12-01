@@ -2,24 +2,31 @@
 
 const graphReducer = (state: any, action: any) => {
     if (state === undefined) {
+        const currentTime = new Date();
         state = {
             data: [
                 {
-                    x: [ 0 ],
+                    x: [ currentTime.toTimeString().split(' ')[0] ],
                     y: [ 0 ],
                     type: 'scatter'
                 }
             ],
             layout: {
                 title: 'Jugular Venous Pressure Information',
-            }
+                width: 700,
+                height: 600,
+                datarevision: 0
+            },
+            revision: 0
         }
     }
 
     switch(action.type) {
         case('UPDATE'):
-            Array(state.data[0].x).push(action.data.value);
-            Array(state.data[0].y).push(action.data.time);
+            state.data[0].y.push(action.data.value);
+            state.data[0].x.push(action.data.time);
+            state.layout.datarevision++;
+            state.revision++;
             return state;
         default:
             return state;
