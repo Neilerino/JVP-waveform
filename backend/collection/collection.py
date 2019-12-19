@@ -1,6 +1,7 @@
 from threading import Thread, _active
 from app import socket
 from random import randint
+from models.history import History
 import datetime
 import json
 import time
@@ -24,6 +25,7 @@ class Collection_Thread(Thread):
                         'time': datetime.datetime.now().strftime("%H:%M:%S")
                     }
                     data_json = json.dumps(data, indent=4, sort_keys=True, default=str)
+                    self.hist.append_data(data_json)
                     socket.emit('message', data_json)
                     time.sleep(1)
         finally:
@@ -35,9 +37,13 @@ class Collection_Thread(Thread):
 
     def begin_collection(self):
         self.collecting = True
+        
+    def set_history(self, hist):
+        self.history = hist
 
-def start_collection(thread):
+def start_collection(thread, hist):
     print('Started Data Collection')
+    thread.set_history()
     thread.begin_collection()
 
 def stop_collection(thread):

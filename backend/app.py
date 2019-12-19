@@ -10,5 +10,3 @@ socket = SocketIO(app, cors_allowed_origins="*")
 app.config.from_object(Config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
-
-from manage import routes, models

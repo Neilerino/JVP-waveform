@@ -1,4 +1,5 @@
 from app import db
+import json
 from datetime import datetime
 
 class History(db.Model):
@@ -6,4 +7,9 @@ class History(db.Model):
     date = db.Column(db.DateTime, nullable=False,
                      default=datetime.now)
     data = db.Column(db.Text)
+    patient = db.Column(db.Text)
     
+    def append_data(self, data_point):
+        data_parsed = json.loads(self.data)
+        print(data_parsed)
+        

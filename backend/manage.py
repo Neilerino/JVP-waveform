@@ -1,5 +1,6 @@
 from collection.collection import Collection_Thread, start_collection, stop_collection
 from app import app, socket
+from models.history import History
 
 thread = Collection_Thread()
 
@@ -12,7 +13,8 @@ def collect_data():
     global thread
     print(thread.collecting)
     if thread.collecting is False:
-        start_collection(thread)
+        hist = History()
+        start_collection(thread, hist)
         return 'Sending task to start collection'
     else:
          return 'Collection already running'
