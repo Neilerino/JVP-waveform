@@ -4,5 +4,5 @@ import graphReducer from './graphReducers';
 
 export default combineReducers({
     displaySideBar: sideBarReducer,
-    graphReducer: graphReducer
+    graphData: graphReducer
 });
