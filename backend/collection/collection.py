@@ -18,6 +18,7 @@ class Collection_Thread(Thread):
         try:
             while True:
                 if self.collecting is True:
+                    # TODO:
                     # call function to get data from micropocessor here,
                     #  for now I'll return a random number
                     data = {

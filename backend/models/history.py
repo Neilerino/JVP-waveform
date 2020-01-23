@@ -9,6 +9,9 @@ class History(db.Model):
     data = db.Column(db.Text)
     patient = db.Column(db.Text)
     
+    def __repr__(self):
+        return "<History {}>".format(self.data)
+    
     def append_data(self, data_point):
         data_parsed = json.loads(self.data)
         print(data_parsed)

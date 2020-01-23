@@ -1,0 +1,11 @@
+.title-box {
+    padding: 0.4em 3em;
+    background-color: #486F84;
+    color: white;
+    font-size: 1.5em;
+    font-family: sans-serif;
+    text-align: center;
+    border: solid black;
+    border-radius: 0.12em;
+    border-width: 0.06em;
+}

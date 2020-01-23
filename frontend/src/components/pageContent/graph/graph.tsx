@@ -7,13 +7,6 @@ interface GraphProps extends React.Props<any> {
     graphData: PlotParams;
 };
 
-// const Graph: React.FC<GraphProps> = ({ graphData }) => {
-
-//     return (
-//         <Plot data={graphData.data} layout={graphData.layout} revision={graphData.revision}/>
-//     )
-// }
-
 class Graph extends React.Component<GraphProps, any> {
     constructor(props: GraphProps) {
         super(props);
