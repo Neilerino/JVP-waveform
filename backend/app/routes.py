@@ -1,6 +1,6 @@
-from collection.collection import Collection_Thread, start_collection, stop_collection
-from app import app, socket
-from models.history import History
+from app import app, socket, db
+from app.collection.collection import Collection_Thread, start_collection, stop_collection
+from app.models import History
 
 thread = Collection_Thread()
 
@@ -26,6 +26,3 @@ def stop_collecting_data():
         stop_collection(thread)
         return 'Sending task to stop collection'
     return 'No collection currently running'
-
-if __name__ == '__main__':
-    socket.run(app, port=4000)
