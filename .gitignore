@@ -1,6 +1,6 @@
-/frontend/node_modules/
-/frontend/jvp-frontend/node_modules
-/backend/__pycache__/*
-/backend/.python-version
-/backend/JVP/*
-/environment/
+/web-app/frontend/node_modules/
+/web-app/frontend/jvp-frontend/node_modules
+/web-app/backend/__pycache__/*
+/web-app/backend/.python-version
+/web-app/backend/JVP/*
+/web-app/environment/
