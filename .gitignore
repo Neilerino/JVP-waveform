@@ -4,3 +4,8 @@
 /web-app/backend/.python-version
 /web-app/backend/JVP/*
 /web-app/environment/
+
+.idea/
+venv/
+firmware/.vscode
+firmware/*.code-workspace
