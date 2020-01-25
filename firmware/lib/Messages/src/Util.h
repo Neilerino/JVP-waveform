@@ -6,6 +6,7 @@
 
 struct StringUtil {
     static std::vector<String> Split(String string, char splitChar);
+    static bool IsNumeric(String s);
 };
 
 int CalculateChecksum(MessageComponents comps);

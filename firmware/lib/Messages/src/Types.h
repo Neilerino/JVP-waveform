@@ -3,6 +3,7 @@
 #include <Arduino.h>
 #include "Option.h"
 
+
 struct MessageType {
     enum class Enum : char {
         Command='C',

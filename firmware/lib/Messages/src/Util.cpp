@@ -19,6 +19,18 @@ std::vector<String> StringUtil::Split(String string, char splitChar) {
     return result;
 }
 
+bool StringUtil::IsNumeric(String s) {
+    bool good = true;
+    s.trim();
+    for (char c : s) {
+        if (!(c == '0' or c == '1' or c == '2' or c == '3' or c == '4' or c == '5' or 
+            c == '6' or c == '7' or c == '8' or c == '9' or c == '.')) {
+                good = false;
+        }
+    } 
+    return good;
+}
+
 int CalculateChecksum(MessageComponents comps) {
     int sum = 0;
 
