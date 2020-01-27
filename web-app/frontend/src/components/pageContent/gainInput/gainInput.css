@@ -1,3 +1,7 @@
 .gain-input {
-    
+    margin-left: 6em;
+    border-radius: 4px;
+    font-size: 1.5em;
+    width: 2.5em;
+    text-align: right;
 }

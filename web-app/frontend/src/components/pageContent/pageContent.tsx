@@ -6,6 +6,8 @@ import typedUseSelector from '../../redux/reduxInterfaces';
 import TitleBox from './titleBox/titleBox';
 import GainBox from './gainBox/gainBox';
 import StatsBox from './statsBox/statsBox'
+import FreqBox from './frequency/freqBox';
+import MovingAverage from './movingAverage/movingAverage';
 import { Stats } from 'fs';
 
 const PageContent: React.FC = () => {
@@ -23,6 +25,10 @@ const PageContent: React.FC = () => {
                 <GainBox />
                 <TitleBox text='Data Statistics'/>
                 <StatsBox />
+                <TitleBox text='Frequency'/>
+                <FreqBox />
+                <TitleBox text='Moving Average'/>
+                <MovingAverage />
             </div>
         </div>
     );

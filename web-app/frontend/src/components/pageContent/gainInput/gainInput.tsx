@@ -4,7 +4,7 @@ import './gainInput.css';
 const GainInput: React.FC = () => {
     return(
         <input className="gain-input"
-        type="number">
+        type="number" value="1.0">
         </input>
     )
 }

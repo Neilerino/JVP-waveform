@@ -2,7 +2,6 @@ import React from 'react';
 import Plot from 'react-plotly.js';
 import { PlotParams } from '../../../interfaces';
 
-
 interface GraphProps extends React.Props<any> {
     graphData: PlotParams;
 };
