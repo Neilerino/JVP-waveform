@@ -1,26 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Plot from 'react-plotly.js';
-import { PlotParams } from '../../../interfaces';
+import typedUseSelector from '../../../redux/reduxInterfaces';
 
-interface GraphProps extends React.Props<any> {
-    graphData: PlotParams;
+const Graph: React.FC = () => {
+
+    const state = useState(typedUseSelector(state => state.graphData));
+
+    useEffect(() => {
+        console.log('Graph State Revision: ' + state[0].revision);
+    })
+
+    return(
+        <Plot 
+            data={state[0].data}
+            layout={state[0].layout}
+            revision={state[0].revision}
+        />
+    )
 };
-
-class Graph extends React.Component<GraphProps, any> {
-    constructor(props: GraphProps) {
-        super(props);
-        this.state = {
-            data: props.graphData.data,
-            layout: props.graphData.layout,
-            revision: props.graphData.revision
-        };
-    }
-
-    render() {
-        return(
-            <Plot data={this.state.data} layout={this.state.layout} revision={this.state.revision}/>
-        )
-    }
-}
 
 export default Graph;

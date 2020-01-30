@@ -1,5 +1,4 @@
 import React from 'react';
-import './freqBox.css';
 
 const FreqBox: React.FC = () => {
     return(

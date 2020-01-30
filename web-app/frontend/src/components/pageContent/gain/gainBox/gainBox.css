@@ -8,9 +8,14 @@
     margin-bottom: 1em;
 }
 
-.top-row {
+.row {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+}
+
+.first-row {
+    margin-bottom: 0.6em;
 }
 
 .header-box-gain {

@@ -27,6 +27,7 @@ const graphReducer = (state: any, action: any) => {
             state.data[0].x.push(action.data.time);
             state.layout.datarevision++;
             state.revision++;
+            console.log(state.revision);
             return state;
         default:
             return state;
