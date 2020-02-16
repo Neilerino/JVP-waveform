@@ -4,11 +4,11 @@ from app.models import History
 
 thread = Collection_Thread()
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def index():
     return 'test message'
 
-@app.route('/collection/POST/start')
+@app.route('/collection/POST/start', methods=['GET', 'POST'])
 def collect_data():
     global thread
     print(thread.collecting)
@@ -19,7 +19,7 @@ def collect_data():
     else:
          return 'Collection already running'
 
-@app.route('/collection/POST/stop')
+@app.route('/collection/POST/stop', methods=['GET', 'POST'])
 def stop_collecting_data():
     global thread
     if thread.collecting is True:

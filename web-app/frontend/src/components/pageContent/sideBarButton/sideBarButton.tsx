@@ -1,6 +1,8 @@
 // TODO: Code Button functionalities
 import React from 'react';
 import './sideBarButton.css';
+import { useDispatch } from 'react-redux';
+import { updateCollecting } from '../../../redux/actions/microActions';
 
 interface SideBarButtonProps extends React.Props<any> {
     buttonType: string;
@@ -8,23 +10,23 @@ interface SideBarButtonProps extends React.Props<any> {
 
 const SideBarButton: React.FC<SideBarButtonProps> = ({ buttonType }) => {
 
-    // Send an API call to the backend to start sending data
-    const collectData = async () => {
-        fetch('http://localhost:4000/collection/POST/start');
-        console.log('Starting Data Collection');
-    };
+    const dispatch = useDispatch()
 
-    const stopData = async () => {
-        fetch('http://localhost:4000/collection/POST/stop')
-        console.log('Stopping collection')
-    }
+    const collectData = async () => {
+        const response = await fetch('http://localhost:4000/collection/POST/start', {
+            method: 'POST',
+            mode: 'no-cors',
+        });
+        if (response.status === 0) {
+            dispatch(updateCollecting({type: 'UPDATE_COLLECTING', value: true}));
+        } else {
+            Error('Error Collecting Data');
+        }
+    };
 
     const buttonAction = async () => {
         if (buttonType === 'collect') {
             collectData();
-        }
-        if (buttonType === 'stop') {
-            stopData();
         }
     };
 

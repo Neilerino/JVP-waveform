@@ -8,12 +8,17 @@
     margin-bottom: 1em;
 }
 
-.top-row {
+.row {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 
-.header-box-gain {
+.first-row {
+    margin-bottom: 0.6em;
+}
+
+.header-box {
     padding: 0.5em 2em;
     background-color: #283E4A;
     color: white;

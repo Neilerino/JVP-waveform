@@ -1,0 +1,12 @@
+.gain-input {
+    border-radius: 4px;
+    font-size: 1.5em;
+    width: 4.6em;
+    text-align: center;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
