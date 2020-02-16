@@ -1,7 +1,14 @@
 // TODO: Fix the typing
 
 const graphReducer = (state: any, action: any) => {
-    if (state === undefined) {
+    if (action.type === 'UPDATE_GRAPH') {
+        state.data[0].y.push(action.data.value);
+        state.data[0].x.push(action.data.time);
+        state.layout.datarevision++;
+        state.revision++;
+        console.log(state.revision);
+
+    } else if (state === undefined) {
         const currentTime = new Date();
         state = {
             data: [
@@ -21,17 +28,7 @@ const graphReducer = (state: any, action: any) => {
         }
     }
 
-    switch(action.type) {
-        case('UPDATE'):
-            state.data[0].y.push(action.data.value);
-            state.data[0].x.push(action.data.time);
-            state.layout.datarevision++;
-            state.revision++;
-            console.log(state.revision);
-            return state;
-        default:
-            return state;
-    }
+    return state;
 }
 
 export default graphReducer;

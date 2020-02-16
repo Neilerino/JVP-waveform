@@ -4,11 +4,15 @@ import ModifyGain from '../modifyGain/modifyGain';
 import GainInput from '../gainInput/gainInput';
 //TODO: Finish this component
 
-const GainBox: React.FC = () => {
+interface GainBoxProps {
+    collecting: boolean
+}
+
+const GainBox: React.FC<GainBoxProps> = (props: GainBoxProps) => {
     return (
         <div className="bounding-box">
             <div className="row first-row">
-                <div className="header-box-gain">
+                <div className="header-box">
                     Gain
                 </div>
                 <GainInput />

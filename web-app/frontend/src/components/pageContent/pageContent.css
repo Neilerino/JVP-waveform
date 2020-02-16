@@ -1,5 +1,6 @@
 .page-content {
     display: flex;
+    justify-content: space-between;
     margin-top: 3rem;
     position: fixed;
     height: 100vmax;
@@ -10,4 +11,7 @@
 
 .microprocessor-information {
     margin-top: 1.75em;
+    margin-right: 1.5em;
+    overflow-y: scroll;
+    height: 40%;
 }

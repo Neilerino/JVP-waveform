@@ -5,12 +5,11 @@ import SideBarButton from '../sideBarButton/sideBarButton';
 
 const SideBar: React.FC = () => {
 
-    const display = typedUseSelector((state: { displaySideBar: Boolean; }) => state.displaySideBar);
+    const display = typedUseSelector((state: { displaySideBar: boolean; }) => state.displaySideBar);
 
     return (
         <div className={ `side-bar${display ? '' : '-none'}`}>
             <SideBarButton buttonType='collect'/>
-            <SideBarButton buttonType='stop'/>
             <SideBarButton buttonType='history'/>
             <SideBarButton buttonType='save'/>
             <SideBarButton buttonType='csv'/>

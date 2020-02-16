@@ -7,8 +7,13 @@ import GainBox from './gain/gainBox/gainBox';
 import StatsBox from './statsBox/statsBox'
 import FreqBox from './frequency/freqBox';
 import MovingAverage from './movingAverage/movingAverage';
+import typedUseSelector from '../../redux/reduxInterfaces';
+
 
 const PageContent: React.FC = () => {
+
+    const collecting = typedUseSelector((state: { collecting: boolean }) => state.collecting);
+
     return(
         <div className="page-content">
             <SideBar />
@@ -17,9 +22,9 @@ const PageContent: React.FC = () => {
             </div>
             <div className="microprocessor-information">
                 <TitleBox text='Digital Potentiometer'/>
-                <GainBox />
+                <GainBox collecting={ collecting }/>
                 <TitleBox text='Data Statistics'/>
-                <StatsBox />
+                <StatsBox collecting={ collecting }/>
                 <TitleBox text='Frequency'/>
                 <FreqBox />
                 <TitleBox text='Moving Average'/>

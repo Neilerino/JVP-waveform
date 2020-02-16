@@ -1,4 +1,4 @@
-export const UPDATE_GRAPH_DATA: string = 'UPDATE';
+export const UPDATE_GRAPH_DATA: string = 'UPDATE_GRAPH';
 interface graphData {
     value: number,
     time: number
