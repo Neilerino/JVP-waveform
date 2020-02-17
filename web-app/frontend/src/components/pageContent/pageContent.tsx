@@ -23,11 +23,11 @@ const PageContent: React.FC = () => {
             <div className="microprocessor-information">
                 <TitleBox text='Digital Potentiometer'/>
                 <GainBox collecting={ collecting }/>
-                <TitleBox text='Data Statistics'/>
+                <TitleBox text='Data Collection'/>
                 <StatsBox collecting={ collecting }/>
                 <TitleBox text='Frequency'/>
                 <FreqBox />
-                <TitleBox text='Moving Average'/>
+                <TitleBox text='Moving Average Filter'/>
                 <MovingAverage />
             </div>
         </div>
