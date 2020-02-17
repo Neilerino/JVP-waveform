@@ -12,6 +12,11 @@ interface UpdateFreq {
     value: number;
 }
 
+interface UpdateAverage {
+    type: string;
+    value: number;
+}
+
 // Todo: This is shit, make it not shit
 export const updateGainValue = (updateTypes: UpdateTypes) => {
     return {
@@ -31,4 +36,11 @@ export const updateFrequency = (updateFreq: UpdateFreq) => {
         type: updateFreq.type,
         value: updateFreq.value,
     } 
+}
+
+export const updateAverageFilter = (updateAverage: UpdateAverage) => {
+    return {
+        type: updateAverage.type,
+        value: updateAverage.value,
+    }
 }
