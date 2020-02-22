@@ -129,6 +129,8 @@ class SetModeCommandQuery : public CommandQuery {
         McuMode::Enum mode_;
 };
 
+
+// todo delete this
 class ModeRequest : public Request {
     public:
         ModeRequest() {}
@@ -139,6 +141,7 @@ class ModeRequest : public Request {
         //todo: get the var from state and return it
 };
 
+// todo delete this
 class ModeRequestQuery : public RequestQuery {
     public:
         unsigned int id() { return 2; }
@@ -166,6 +169,7 @@ class SetGainCommandQuery : public CommandQuery {
 
 };  
 
+// todo delete this
 class GainRequest : public Request {
     public:
         GainRequest() {}
@@ -176,6 +180,7 @@ class GainRequest : public Request {
         //todo: get current gain from state and return
 };
 
+// todo delete this
 class GainRequestQuery : public RequestQuery {
     public:
         unsigned int id() { return 3; }
@@ -202,6 +207,7 @@ class SetFrequencyCommandQuery : public CommandQuery {
         unsigned int freq_;
 };
 
+// todo delete this
 class FrequencyRequest : public Request {
     public:
         FrequencyRequest() {}
@@ -209,9 +215,10 @@ class FrequencyRequest : public Request {
         std::vector<String> parameters();
 
     private:
-        //todo: get current gain from state and return
+        //todo: get current freq from state and return
 };
 
+// todo delete this
 class FrequencyRequestQuery : public RequestQuery {
     public:
         unsigned int id() { return 4; }
@@ -232,12 +239,13 @@ class SetMovingAverageActiveCommandQuery : public CommandQuery {
         bool active() { return active_; }
         static Option<SetMovingAverageActiveCommandQuery> TryCreate(MessageComponents c);
 
-        SetMovingAverageActiveCommandQuery() {}
+        SetMovingAverageActiveCommandQuery() {} //FIXME: remove?
     private:
         SetMovingAverageActiveCommandQuery(MessageComponents c, bool act);
         bool active_;
 };
 
+// todo delete this
 class MovingAverageActiveRequest : public Request {
     public:
         MovingAverageActiveRequest() {}
@@ -245,9 +253,10 @@ class MovingAverageActiveRequest : public Request {
         std::vector<String> parameters();
 
     private:
-        //todo: get current gain from state and return
+        //todo: get current setting from state and return
 };
 
+// todo delete this
 class MovingAverageActiveRequestQuery : public RequestQuery {
     public:
         unsigned int id() { return 5; }
@@ -268,12 +277,13 @@ class SetMovingAverageLengthCommandQuery : public CommandQuery {
         int length() { return length_; }
         static Option<SetMovingAverageLengthCommandQuery> TryCreate(MessageComponents c);
 
-        SetMovingAverageLengthCommandQuery() {}
+        SetMovingAverageLengthCommandQuery() {} //FIXME: remove?
     private:
         SetMovingAverageLengthCommandQuery(MessageComponents c, int l);
         int length_;
 };
 
+// todo delete this
 class MovingAverageLengthRequest : public Request {
     public:
         MovingAverageLengthRequest() {}
@@ -281,9 +291,10 @@ class MovingAverageLengthRequest : public Request {
         std::vector<String> parameters();
 
     private:
-        //todo: get current gain from state and return
+        //todo: get current len from state and return
 };
 
+// todo delete this
 class MovingAverageLengthRequestQuery : public RequestQuery {
     public: 
         unsigned int id() { return 6; }
@@ -291,4 +302,54 @@ class MovingAverageLengthRequestQuery : public RequestQuery {
 
     private:
         MovingAverageLengthRequestQuery(MessageComponents c);
+};
+
+
+/*
+ * StateRequest
+ * id07
+ */
+class StateRequestQuery : public RequestQuery {
+    public:
+        unsigned int id() { return 7; }
+        static Option<StateRequestQuery> TryCreate(MessageComponents c);
+
+    private:
+        StateRequestQuery(MessageComponents c);
+};
+
+// todo decide when its best to supply this with the current state
+// either on construction or on call of parameters
+class StateRequest : public Request {
+    public:
+        StateRequest(JvpState s);
+        unsigned int id() { return 7; }
+        std::vector<String> parameters();
+
+    private:
+        JvpState state_;
+};
+
+
+/*
+ * DataRequests
+ * id08
+ */
+class DataRequestQuery : public RequestQuery {
+    public:
+        unsigned int id() { return 8; }
+        static Option<DataRequestQuery> TryCreate(MessageComponents c);
+
+    private:
+        DataRequestQuery(MessageComponents c);
+};
+
+class DataRequest : public Request {
+    public:
+        DataRequest(double data);
+        unsigned int id() { return 8; }
+        std::vector<String> parameters();
+
+    private:
+        double data_;
 };

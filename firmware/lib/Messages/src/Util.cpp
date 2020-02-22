@@ -54,3 +54,11 @@ int CalculateChecksum(MessageComponents comps) {
 bool ValidateChecksum(MessageComponents comps) {
     return comps.checksum == CalculateChecksum(comps);
 }
+
+double AverageList(std::list<double> l) {
+    double temp = 0.0;
+    for (double e : l) {
+        temp += e;
+    }
+    return temp / l.size();
+}

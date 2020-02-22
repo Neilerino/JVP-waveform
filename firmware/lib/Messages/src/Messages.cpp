@@ -284,3 +284,56 @@ Option<MovingAverageLengthRequestQuery> MovingAverageLengthRequestQuery::TryCrea
     Option<MovingAverageLengthRequestQuery> g = Option<MovingAverageLengthRequestQuery>::Some(q);
     return g;
 }
+
+
+/*
+ * StateRequest
+ * id07
+ */
+StateRequestQuery::StateRequestQuery(MessageComponents c) :
+    RequestQuery(c)
+{}
+
+Option<StateRequestQuery> StateRequestQuery::TryCreate(MessageComponents c) {
+    StateRequestQuery q = StateRequestQuery(c);
+    Option<StateRequestQuery> g = Option<StateRequestQuery>::Some(q);
+    return g;
+}
+
+StateRequest::StateRequest(JvpState s) :
+    state_(s)
+{}
+
+std::vector<String> StateRequest::parameters() {
+    std::vector<String> t;
+    t.push_back((String)(int)this->state_.mode);
+    t.push_back((String)this->state_.gain);
+    t.push_back((String)this->state_.frequency);
+    t.push_back((String)this->state_.averageActive);
+    t.push_back((String)this->state_.averageLength);
+    return t;
+}
+
+/*
+ * DataRequests
+ * id08
+ */
+DataRequestQuery::DataRequestQuery(MessageComponents c) :
+    RequestQuery(c)
+{}
+
+Option<DataRequestQuery> DataRequestQuery::TryCreate(MessageComponents c) {
+    DataRequestQuery q = DataRequestQuery(c);
+    Option<DataRequestQuery> g = Option<DataRequestQuery>::Some(q);
+    return g;
+}
+
+DataRequest::DataRequest(double data) :
+    data_(data)
+{}
+
+std::vector<String> DataRequest::parameters() {
+    std::vector<String> t;
+    t.push_back((String)this->data_);
+    return t;
+}
