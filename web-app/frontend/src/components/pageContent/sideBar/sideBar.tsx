@@ -9,7 +9,6 @@ const SideBar: React.FC = () => {
 
     return (
         <div className={ `side-bar${display ? '' : '-none'}`}>
-            <SideBarButton buttonType='collect'/>
             <SideBarButton buttonType='history'/>
             <SideBarButton buttonType='save'/>
             <SideBarButton buttonType='csv'/>

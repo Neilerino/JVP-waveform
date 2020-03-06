@@ -1,5 +1,6 @@
 interface UpdateTypes {
     type: string;
+    value: number;
 }
 
 interface UpdateCollect {
@@ -14,13 +15,14 @@ interface UpdateFreq {
 
 interface UpdateAverage {
     type: string;
-    value: number;
+    value: number | null;
 }
 
 // Todo: This is shit, make it not shit
 export const updateGainValue = (updateTypes: UpdateTypes) => {
     return {
-        type: updateTypes
+        type: updateTypes.type,
+        value: updateTypes.value
     };
 };
 

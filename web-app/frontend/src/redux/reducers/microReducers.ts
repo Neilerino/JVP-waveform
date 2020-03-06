@@ -1,5 +1,6 @@
 interface GainAction {
     type: string;
+    value: number;
 }
 
 interface CollectionAction {
@@ -18,15 +19,10 @@ interface MovingAverageAction {
 }
 
 export const gainReducer = (state: number = 1.0, action: GainAction) => {
-    if (action.type === 'increase') {
-        state += 0.1;
-        return state;
-    } else if (action.type === 'decrease') {
-        state -= 0.1;
-        return state;
-    } else {
-        return state;
+    if (action.type === 'UPDATE_GAIN_VALUE') {
+        state = action.value
     }
+    return state;
 }
 
 export const collectionReducer = (state: boolean = false, action: CollectionAction) => {
@@ -48,7 +44,7 @@ export const frequencyReducer = (state: number = 1.0, action: FrequencyAction) =
 }
 
 export const movingAverageReducer = (state: number | null = null, action: MovingAverageAction) => {
-    if (action.type === 'ENABLE') {
+    if (action.type === 'UPDATE_AVERAGE_VALUE') {
         state = action.value;
     }
     return state;
