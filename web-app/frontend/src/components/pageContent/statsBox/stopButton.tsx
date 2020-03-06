@@ -1,4 +1,5 @@
 import React from 'react';
+import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux';
 import { updateCollecting } from '../../../redux/actions/microActions';
 
@@ -17,7 +18,9 @@ const StopButton: React.FC<StopButtonProps> = (props: StopButtonProps) => {
         });
         if (response.status === 0) {
             dispatch(updateCollecting({type: 'UPDATE_COLLECTING', value: false}));
+            toast.info('Stopping Data Collecting');
         } else {
+            toast.error('Could Not Stop Collecting');
             Error('Could not stop data Collection');
         }
     }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { updateCollecting } from '../../../redux/actions/microActions';
 
@@ -17,7 +18,9 @@ const StartButton: React.FC<StartButtonProps> = (props: StartButtonProps) => {
         });
         if (response.status === 0) {
             dispatch(updateCollecting({type: 'UPDATE_COLLECTING', value: true}));
+            toast.success('Collecting Data');
         } else {
+            toast.warn('Unable to Collect Data');
             Error('Error Collecting Data');
         }
     }
