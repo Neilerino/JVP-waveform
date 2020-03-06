@@ -1,4 +1,5 @@
 from app import app, socket, db
+from flask import request
 from app.collection.collection import Collection_Thread, start_collection, stop_collection
 from app.models import History
 
@@ -26,3 +27,10 @@ def stop_collecting_data():
         stop_collection(thread)
         return 'Sending task to stop collection'
     return 'No collection currently running'
+
+
+#TODO: After the microproccesor class is implemented interface this API with that class
+@app.route('/microprocessor/POST/values', methods=['GET', 'POST'])
+def modify_microprocessor():
+    micro_state = request.json
+    return 'Sent information to MicroProcessor'

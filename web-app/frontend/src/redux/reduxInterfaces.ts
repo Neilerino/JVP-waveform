@@ -5,6 +5,8 @@ export interface StoreState {
     displaySideBar: boolean;
     graphData: PlotParams;
     gainValue: number;
+    frequencyValue: number;
+    movingAverageValue: number | null;
     collecting: boolean;
 };
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import './statsBox.css';
 import StopButton from './stopButton';
+import StartButton from './startButton';
 import ElapsedTime from './elapsedTime';
 //TODO: Finish this component
 
@@ -16,6 +17,9 @@ const StatsBox: React.FC<StatsBoxProps> = (props: StatsBoxProps) => {
                     Elapsed Time
                 </div>
             <ElapsedTime collecting={ props.collecting }/>
+            </div>
+            <div className="row first-row">
+                <StartButton disabled={ props.collecting }/>
             </div>
             <div className="row">
                 <StopButton disabled={ props.collecting }/>

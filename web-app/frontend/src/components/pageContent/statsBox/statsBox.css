@@ -19,6 +19,27 @@
     cursor: default; 
 }
 
+.start-button {
+    font-family: sans-serif;
+    width: 100%;
+    padding: 0.5em;
+    font-size: 1em;
+    background-color: #06D6A0;
+    border-color: black;
+    color: white;
+    border-radius: 0.125em;
+    cursor: pointer;
+}
+
+.start-button:hover {
+    background-color: rgb(5, 168, 125);
+}
+
+.start-button:disabled {
+    background-color: grey;
+    cursor: default; 
+}
+
 .elapsed-time {
     display: inline-block;
     background-color: white;
