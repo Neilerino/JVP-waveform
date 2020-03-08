@@ -22,7 +22,7 @@ const App: React.FC = () => {
       const graphData = JSON.parse(data);
       dispatch(updateGraphData({value: graphData.value, time: graphData.time}));
     });
-  });
+  }, []);
 
   return (
     <>
