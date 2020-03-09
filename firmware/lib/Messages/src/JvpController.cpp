@@ -1,18 +1,20 @@
 #include "JvpController.h"
 #include "Util.h"
 
-JvpController::JvpController(long baudrate) :
+JvpController::JvpController(DigiPot& pot, long baudrate) :
     state_(JvpState::Initial()),
     txIntervalMicro_( (1.0/this->state_.frequency) * pow(10, 6) ),
     lastTxTimeMicro_(0),
     baudrate_(baudrate),
-    inputBuffer_(std::queue<String>()),
-    outputBuffer_(std::queue<String>()),
-    movingAvgBuffer_(std::list<double>(this->state_.averageLength, 0.0))
+    rxBuffer_(std::queue<String>()),
+    txBuffer_(std::queue<String>()),
+    movingAvgBuffer_(std::list<double>(this->state_.averageLength, 0.0)),
+    pot_(pot)
 {}
 
 void JvpController::Start() {
     Serial.begin(this->baudrate_);
+    this->pot_.Begin();
 
     while(true) {
         // send Transmissions at appropriate interval as per the state's current mode
@@ -172,14 +174,14 @@ void JvpController::OnSerialDataAvailable() {
     };
     
     while (TerminatorPresent) {
-        this->inputBuffer_.push(Serial.readStringUntil('\n'));
+        this->rxBuffer_.push(Serial.readStringUntil('\n'));
     }
 }
 
 Option<MessageComponents> JvpController::NextValidRx() {
-    while (!this->inputBuffer_.empty()) {
-        String rxStr = this->inputBuffer_.front();
-        this->inputBuffer_.pop();
+    while (!this->rxBuffer_.empty()) {
+        String rxStr = this->rxBuffer_.front();
+        this->rxBuffer_.pop();
         
         Option<MessageComponents> rxCompsOpt = MessageComponents::FromString(rxStr);
         if (rxCompsOpt.isSome()) {
@@ -194,16 +196,16 @@ Option<MessageComponents> JvpController::NextValidRx() {
 }
 
 void JvpController::QueueTransmission(Transmission& tx) {
-    this->outputBuffer_.push(tx.ToString());
+    this->txBuffer_.push(tx.ToString());
 }
 
 void JvpController::SendNextTransmission() {
-    if (!this->outputBuffer_.empty()) {
-        while (this->outputBuffer_.front().length() > Serial.availableForWrite()) { ; } // delay if buffer is full
-        for (char c : this->outputBuffer_.front()) {
+    if (!this->txBuffer_.empty()) {
+        while (this->txBuffer_.front().length() > Serial.availableForWrite()) { ; } // delay if buffer is full
+        for (char c : this->txBuffer_.front()) {
             Serial.write(c);
         }
-        this->outputBuffer_.pop();
+        this->txBuffer_.pop();
     }
 }
 

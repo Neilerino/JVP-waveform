@@ -4,23 +4,20 @@
 #include "Types.h"
 #include "Messages.h"
 #include "Option.h"
+#include "DigiPot.h"
 #include <queue>
 #include <list>
 
-// todo needs:
-// some function to write to the serial buffer
-// some function to read the serial buffer
-// some function to validate the messages that come from the serial buffer
-// something to read from the sensor
-
+//fixme if Arduino doesnt like it having the looping occur in the setup() block 
+// probably break Start() up into:
+// Init() which starts the Serial connection and spi/i2c connections
+// Cycle() which has the logic to be performed in each mcu cycle
 
 class JvpController {
     public:
         //todo need to add ADC pin and spi/i2c pins on creation
-        JvpController(long baudrate=115200); // todo try 1152000 (10x default)
+        JvpController(DigiPot& pot, long baudrate=115200); // todo try 1152000 (10x default)
         void Start();
-
-
 
     private:
         // fields
@@ -29,9 +26,10 @@ class JvpController {
         unsigned long lastTxTimeMicro_;
         long baudrate_;
 
-        std::queue<String> inputBuffer_;
-        std::queue<String> outputBuffer_;
+        std::queue<String> rxBuffer_;
+        std::queue<String> txBuffer_;
         std::list<double> movingAvgBuffer_; // most recent readings at front of list
+        DigiPot& pot_;
 
         // members
         void OnSerialDataAvailable();
