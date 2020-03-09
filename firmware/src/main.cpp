@@ -10,7 +10,7 @@ String incomingMsg = "C02, 0; 213\r\n"; // good
 // String incomingMsg = "C02, 0; 255\r\n"; // bad checksum
 // String incomingMsg = "C02, 2; 213\r\n"; // bad param
 
-// String incomingMsg = "R00; 178\r\n"; // good
+StateRequest tx = StateRequest(JvpState::Initial());
 
 void setup() {
     // Serial.begin(115200);
@@ -18,6 +18,10 @@ void setup() {
     delay(1000);
     Serial.println();
     Serial.println("Starting...");
+    Serial.println();
+
+    Serial.println();
+    Serial.println(tx.ToString());
     Serial.println();
 }
 

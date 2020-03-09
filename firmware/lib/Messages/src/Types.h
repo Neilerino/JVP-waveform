@@ -3,6 +3,7 @@
 #include <Arduino.h>
 #include "Option.h"
 
+
 struct MessageType {
     enum class Enum : char {
         Command='C',
@@ -36,4 +37,14 @@ struct McuMode {
 
     static bool Validate(int i);
     static Option<McuMode::Enum> Create(int i);
+};
+
+struct JvpState {
+    McuMode::Enum mode;
+    double gain;
+    unsigned int frequency;
+    bool averageActive;
+    unsigned int averageLength;
+
+    static JvpState Initial();
 };

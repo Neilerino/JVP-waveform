@@ -135,3 +135,12 @@ bool McuMode::Validate(int i) {
             return false;
     }
 }
+
+
+/*
+ * JvpState
+ */
+JvpState JvpState::Initial() {
+    JvpState t = { McuMode::Enum::Command, 1.0, 250, false, 8 };
+    return t;
+}

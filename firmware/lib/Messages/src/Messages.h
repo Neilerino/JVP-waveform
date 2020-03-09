@@ -129,9 +129,11 @@ class SetModeCommandQuery : public CommandQuery {
         McuMode::Enum mode_;
 };
 
-class SetModeRequest : public Request {
+
+// todo delete this
+class ModeRequest : public Request {
     public:
-        SetModeRequest() {}
+        ModeRequest() {}
         unsigned int id() { return 2; }
         std::vector<String> parameters();
     
@@ -139,11 +141,215 @@ class SetModeRequest : public Request {
         //todo: get the var from state and return it
 };
 
-class SetModeRequestQuery : public RequestQuery {
+// todo delete this
+class ModeRequestQuery : public RequestQuery {
     public:
         unsigned int id() { return 2; }
-        static Option<SetModeRequestQuery> TryCreate();
+        static Option<ModeRequestQuery> TryCreate(MessageComponents c);
 
     private:
-        SetModeRequestQuery(MessageComponents c);
+        ModeRequestQuery(MessageComponents c);
+};
+
+
+/*
+ * Gain Set
+ * id03
+ */
+class SetGainCommandQuery : public CommandQuery {
+    public:
+        unsigned int id() { return 3; }
+        double gain() { return gain_; }
+        static Option<SetGainCommandQuery> TryCreate(MessageComponents c);
+
+        SetGainCommandQuery() {} //FIXME: remove if can?
+    private:
+        SetGainCommandQuery(MessageComponents c, double gain);
+        double gain_;
+
+};  
+
+// todo delete this
+class GainRequest : public Request {
+    public:
+        GainRequest() {}
+        unsigned int id() { return 3; }
+        std::vector<String> parameters();
+
+    private:
+        //todo: get current gain from state and return
+};
+
+// todo delete this
+class GainRequestQuery : public RequestQuery {
+    public:
+        unsigned int id() { return 3; }
+        static Option<GainRequestQuery> TryCreate(MessageComponents c);
+
+    private:
+        GainRequestQuery(MessageComponents c);
+};
+
+
+/*
+ * Frequency
+ * id04
+ */
+class SetFrequencyCommandQuery : public CommandQuery {
+    public:
+        unsigned int id() { return 4; }
+        unsigned int frequency() { return freq_; }
+        static Option<SetFrequencyCommandQuery> TryCreate(MessageComponents c);
+
+        SetFrequencyCommandQuery() {} //FIXME: remove?
+    private:
+        SetFrequencyCommandQuery(MessageComponents c, unsigned int f);
+        unsigned int freq_;
+};
+
+// todo delete this
+class FrequencyRequest : public Request {
+    public:
+        FrequencyRequest() {}
+        unsigned int id() { return 4; }
+        std::vector<String> parameters();
+
+    private:
+        //todo: get current freq from state and return
+};
+
+// todo delete this
+class FrequencyRequestQuery : public RequestQuery {
+    public:
+        unsigned int id() { return 4; }
+        static Option<FrequencyRequestQuery> TryCreate(MessageComponents c);
+
+    private:
+        FrequencyRequestQuery(MessageComponents c);
+};
+
+
+/*
+ * MovingAverageActive
+ * id05
+ */
+class SetMovingAverageActiveCommandQuery : public CommandQuery {
+    public:
+        unsigned int id() { return 5; }
+        bool active() { return active_; }
+        static Option<SetMovingAverageActiveCommandQuery> TryCreate(MessageComponents c);
+
+        SetMovingAverageActiveCommandQuery() {} //FIXME: remove?
+    private:
+        SetMovingAverageActiveCommandQuery(MessageComponents c, bool act);
+        bool active_;
+};
+
+// todo delete this
+class MovingAverageActiveRequest : public Request {
+    public:
+        MovingAverageActiveRequest() {}
+        unsigned int id() { return 5; }
+        std::vector<String> parameters();
+
+    private:
+        //todo: get current setting from state and return
+};
+
+// todo delete this
+class MovingAverageActiveRequestQuery : public RequestQuery {
+    public:
+        unsigned int id() { return 5; }
+        static Option<MovingAverageActiveRequestQuery> TryCreate(MessageComponents c);
+
+    private:
+        MovingAverageActiveRequestQuery(MessageComponents c);
+};
+
+
+/*
+ * MovingAverageLength
+ * id06
+ */
+class SetMovingAverageLengthCommandQuery : public CommandQuery {
+    public:
+        unsigned int id() { return 6; }
+        int length() { return length_; }
+        static Option<SetMovingAverageLengthCommandQuery> TryCreate(MessageComponents c);
+
+        SetMovingAverageLengthCommandQuery() {} //FIXME: remove?
+    private:
+        SetMovingAverageLengthCommandQuery(MessageComponents c, int l);
+        int length_;
+};
+
+// todo delete this
+class MovingAverageLengthRequest : public Request {
+    public:
+        MovingAverageLengthRequest() {}
+        unsigned int id() { return 6; }
+        std::vector<String> parameters();
+
+    private:
+        //todo: get current len from state and return
+};
+
+// todo delete this
+class MovingAverageLengthRequestQuery : public RequestQuery {
+    public: 
+        unsigned int id() { return 6; }
+        static Option<MovingAverageLengthRequestQuery> TryCreate(MessageComponents c);
+
+    private:
+        MovingAverageLengthRequestQuery(MessageComponents c);
+};
+
+
+/*
+ * StateRequest
+ * id07
+ */
+class StateRequestQuery : public RequestQuery {
+    public:
+        unsigned int id() { return 7; }
+        static Option<StateRequestQuery> TryCreate(MessageComponents c);
+
+    private:
+        StateRequestQuery(MessageComponents c);
+};
+
+// todo decide when its best to supply this with the current state
+// either on construction or on call of parameters
+class StateRequest : public Request {
+    public:
+        StateRequest(JvpState s);
+        unsigned int id() { return 7; }
+        std::vector<String> parameters();
+
+    private:
+        JvpState state_;
+};
+
+
+/*
+ * DataRequests
+ * id08
+ */
+class DataRequestQuery : public RequestQuery {
+    public:
+        unsigned int id() { return 8; }
+        static Option<DataRequestQuery> TryCreate(MessageComponents c);
+
+    private:
+        DataRequestQuery(MessageComponents c);
+};
+
+class DataRequest : public Request {
+    public:
+        DataRequest(double data);
+        unsigned int id() { return 8; }
+        std::vector<String> parameters();
+
+    private:
+        double data_;
 };

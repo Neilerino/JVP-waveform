@@ -54,10 +54,6 @@ if __name__ == "__main__":
         assert b.is_open()
         i = 0
         while i < 5:
-            # if a.in_waiting() > 0:
-            #     print("reading:", a.read(a.in_waiting()))
-            #     i = i + 1
-            #     time.sleep(1)
             reading = a.read_until(b'\r\n').decode("utf-8")
             print("received:", reading.replace("\r\n", "(CR)(LF)"))
             i = i + 1
