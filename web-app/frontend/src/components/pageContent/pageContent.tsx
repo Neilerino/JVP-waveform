@@ -1,40 +1,34 @@
-import React from 'react';
-import './pageContent.css';
-import SideBar from './sideBar/sideBar';
-import Graph from './graph/graph';
-import TitleBox from './titleBox/titleBox';
-import GainBox from './gain/gainBox/gainBox';
-import StatsBox from './statsBox/statsBox'
-import FreqBox from './frequency/freqBox';
-import MovingAverage from './movingAverage/movingAverage';
-import typedUseSelector from '../../redux/reduxInterfaces';
+import React, { useState } from "react";
+import SideBar from "./sideBar/sideBar";
+import styles from "./pageContent.module.scss";
+import DataCollection from "../../pages/dataColleciton/dataCollection";
+import History from "../../pages/history/history";
 
+export const pages = {
+  history: "history",
+  dataCapture: "dataCapture"
+};
 
 const PageContent: React.FC = () => {
+  const [currentPage, setCurrentPage] = useState<any | any>(pages.dataCapture);
 
-    const collecting = typedUseSelector((state: { collecting: boolean }) => state.collecting);
+  const getCurrentPage = () => {
+    switch (currentPage) {
+      case pages.dataCapture:
+        return <DataCollection />;
+      case pages.history:
+        return <History />;
+      default:
+        throw new Error("Unknown Page State");
+    }
+  };
 
-    return(
-        <div className="page-content">
-            <SideBar />
-            <div className="graph-background">
-                <Graph />
-            </div>
-            <div className="microprocessor-information">
-                <TitleBox text='Data Collection'/>
-                <StatsBox collecting={ collecting }/>
-
-                <TitleBox text='Frequency'/>
-                <FreqBox />
-
-                <TitleBox text='Digital Potentiometer'/>
-                <GainBox collecting={ collecting }/>
-
-                <TitleBox text='Moving Average Filter'/>
-                <MovingAverage />
-            </div>
-        </div>
-    );
-}
+  return (
+    <div className={styles.wrapper}>
+      <SideBar router={setCurrentPage} currentPage={currentPage} />
+      {getCurrentPage()}
+    </div>
+  );
+};
 
 export default PageContent;
