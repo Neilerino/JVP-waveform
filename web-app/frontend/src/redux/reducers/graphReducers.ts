@@ -1,34 +1,22 @@
 // TODO: Fix the typing
 
-const graphReducer = (state: any, action: any) => {
-    if (action.type === 'UPDATE_GRAPH') {
-        state.data[0].y.push(action.data.value);
-        state.data[0].x.push(action.data.time);
-        state.layout.datarevision++;
-        state.revision++;
-        console.log(state.revision);
+const initialState = () => {
+  return {
+    x: [new Date().toTimeString().split(" ")[0]],
+    y: [0],
+    type: "scatter"
+  };
+};
 
-    } else if (state === undefined) {
-        const currentTime = new Date();
-        state = {
-            data: [
-                {
-                    x: [ currentTime.toTimeString().split(' ')[0] ],
-                    y: [ 0 ],
-                    type: 'scatter'
-                }
-            ],
-            layout: {
-                title: 'Jugular Venous Pressure Information',
-                width: 700,
-                height: 600,
-                datarevision: 0
-            },
-            revision: 0
-        }
-    }
-
-    return state;
-}
+const graphReducer = (
+  data: any = initialState(),
+  { data: newData, type }: any
+) => {
+  if (type === "UPDATE_GRAPH") {
+    const { value, time } = newData;
+    return { ...data, x: data.x.concat([time]), y: data.y.concat([value]) };
+  }
+  return data;
+};
 
 export default graphReducer;

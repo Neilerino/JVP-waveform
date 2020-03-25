@@ -1,0 +1,15 @@
+.button {
+  background-color: #283e4a;
+  border: thin black;
+  color: ivory;
+  padding: 0.7em;
+  margin-top: 0.15em;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1.25em;
+  text-align: center;
+  font-family: sans-serif;
+}
+.button:hover {
+  background-color: rgba(40, 62, 74, 0.55);
+}
