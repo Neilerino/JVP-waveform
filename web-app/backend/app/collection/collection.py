@@ -1,7 +1,7 @@
 from threading import Thread, _active
 from app import db, socket
 from random import randint
-from app.models import History
+from app.interfacer import HistoryInterfacer
 import datetime
 import json
 import time
@@ -22,12 +22,12 @@ class Collection_Thread(Thread):
                     # TODO:
                     # call function to get data from micropocessor here,
                     #  for now I'll return a random number
-                    data = {
-                        'value': randint(0, 100),
-                        'time': datetime.datetime.now().strftime("%H:%M:%S")
-                    }
+                    # data = {
+                    #     'value': randint(0, 100),
+                    #     'time': datetime.datetime.now().strftime("%H:%M:%S")
+                    # }
+                    data = self.history.stream_history_data()
                     data_json = json.dumps(data, indent=4, sort_keys=True, default=str)
-                    self.history.append_data(data_json)
                     socket.emit('message', data_json)
                     time.sleep(1)
         finally:
@@ -43,10 +43,10 @@ class Collection_Thread(Thread):
     def set_history(self, hist):
         self.history = hist
 
-def start_collection(thread, hist):
+def start_collection(thread, hist_id):
     print('Started Data Collection')
-    db.session.add(hist)
-    thread.set_history(hist)
+    history = HistoryInterfacer(hist_id)
+    thread.set_history(history)
     thread.begin_collection()
 
 def stop_collection(thread):

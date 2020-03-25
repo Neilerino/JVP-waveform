@@ -4,11 +4,16 @@ interface graphData {
   time: number;
 }
 
-const updateGraphData = (data: graphData) => {
+export const updateGraphData = (data: graphData) => {
   return {
     type: UPDATE_GRAPH_DATA,
     data: data
   };
 };
 
-export default updateGraphData;
+export const updateGraphId = (data: number) => {
+  return {
+    type: "UPDATE_ID",
+    data: data
+  };
+};
