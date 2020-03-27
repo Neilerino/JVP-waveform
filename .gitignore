@@ -11,3 +11,7 @@ web-app/venv/
 web-app/backend/app/collection/__pycache__/
 
 *.pyc
+.idea/
+venv/
+firmware/.vscode
+firmware/*.code-workspace
