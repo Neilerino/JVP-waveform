@@ -40,7 +40,7 @@ def modify_microprocessor():
 @app.route('/history/GET/ids', methods=['GET'])
 def get_histories():
     ids = [1, 2, 3]
-    return jsonify(ids)
+    return jsonify(ids).data
 
 @app.route('/history/GET/<int:hist_id>/data', methods=['GET'])
 def get_history_data(hist_id):

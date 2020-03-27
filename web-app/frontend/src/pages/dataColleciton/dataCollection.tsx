@@ -10,7 +10,7 @@ import Plot from "react-plotly.js";
 
 // Note logic for changing layout based on how many points there are
 // can be done here.
-const makePlotlyLayout = (title: string, datarevision: number) => ({
+export const makePlotlyLayout = (title: string, datarevision: number) => ({
   title,
   datarevision
 });
