@@ -2,7 +2,7 @@ import React from "react";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { updateCollecting } from "../../../redux/actions/microActions";
-import { updateGraphId } from "../../../redux/actions/graphActions";
+import { updateGraphId, resetGraph } from "../../../redux/actions/graphActions";
 
 interface StartButtonProps {
   disabled: boolean;
@@ -18,8 +18,8 @@ const StartButton: React.FC<StartButtonProps> = (props: StartButtonProps) => {
         method: "POST"
       }
     );
-    debugger;
     if (response.status === 200) {
+      dispatch(resetGraph());
       dispatch(updateCollecting({ type: "UPDATE_COLLECTING", value: true }));
       toast.success("Collecting Data");
     } else {

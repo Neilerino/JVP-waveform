@@ -14,8 +14,8 @@ class HistoryInterfacer():
                 if i > 0:
                     row_values = row.split()[0].split(',')
                     data = {
-                        "value" : row_values[1],
-                        "time" : row_values[0]
+                        "y" : row_values[1],
+                        "x" : row_values[0]
                     }
                     data_points.append(data)
                 i += 1
@@ -29,8 +29,8 @@ class HistoryInterfacer():
                 if self.index  <= i  < self.index + 10:
                     row_values = row.split()[0].split(',')
                     data = {
-                        "value" : row_values[1],
-                        "time" : row_values[0]
+                        "y" : row_values[1],
+                        "x" : row_values[0]
                     }
                     data_points.append(data)
                 i += 1

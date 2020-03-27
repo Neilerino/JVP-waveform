@@ -14,7 +14,7 @@ const StopButton: React.FC<StopButtonProps> = (props: StopButtonProps) => {
     const response = await fetch("http://localhost:4000/collection/POST/stop", {
       method: "POST"
     });
-    if (response.status === 0) {
+    if (response.status === 200) {
       dispatch(updateCollecting({ type: "UPDATE_COLLECTING", value: false }));
       toast.info("Stopping Data Collecting");
     } else {

@@ -5,9 +5,36 @@ import Plot from "react-plotly.js";
 import typedUseSelector from "../../redux/reduxInterfaces";
 import TitleBox from "../../components/pageContent/titleBox/titleBox";
 import { makePlotlyLayout } from "../dataColleciton/dataCollection";
+import { PlotData } from "plotly.js";
+
+const initialGraphState = () => {
+  return {
+    x: [new Date().toTimeString().split(" ")[0]],
+    y: [0],
+    type: "scatter"
+  };
+};
+
+const bundleGraph = (graphObject: object[]) => {
+  let graph = {
+    x: [],
+    y: [],
+    type: "scatter"
+  };
+  graphObject.forEach((dataPoint: any) => {
+    graph = {
+      ...graph,
+      x: graph.x.concat(dataPoint.x),
+      y: graph.y.concat(dataPoint.y)
+    };
+  });
+  return graph;
+};
 
 const History: React.FC = () => {
-  const [state, updateState] = useState([0]);
+  const [ids, updateIds] = useState([0]);
+
+  const [graphData, updateGraph] = useState(initialGraphState() as any);
 
   const getData = async () => {
     const responseData = await fetch("http://localhost:4000/history/GET/ids", {
@@ -17,16 +44,24 @@ const History: React.FC = () => {
         "Content-Type": "application/json"
       }
     }).then(response => response.json());
-    updateState(responseData);
+    updateIds(responseData);
   };
 
   useEffect(() => {
     getData();
   }, []);
 
-  const graphData = typedUseSelector(
-    (state: { graphData: any }) => state.graphData
-  );
+  const handleCardClick = async (id: number) => {
+    const data = await fetch(`http://localhost:4000/history/GET/${id}/data`, {
+      method: "GET",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then(response => response.json());
+    const graph = bundleGraph(data);
+    updateGraph(graph);
+  };
 
   return (
     <>
@@ -41,8 +76,14 @@ const History: React.FC = () => {
       />
       <div className={styles.cardContainer}>
         <TitleBox text="Past Collections" />
-        {state.map(value => {
-          return <Card title={"Sample Data Set" + value} id={value} />;
+        {ids.map(value => {
+          return (
+            <Card
+              title={"Sample Data Set" + value}
+              id={value}
+              handleClick={() => handleCardClick(value)}
+            />
+          );
         })}
       </div>
     </>

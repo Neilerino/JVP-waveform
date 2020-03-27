@@ -11,6 +11,13 @@ export const updateGraphData = (data: graphData) => {
   };
 };
 
+export const resetGraph = () => {
+  return {
+    type: "RESET_GRAPH",
+    data: null
+  };
+};
+
 export const updateGraphId = (data: number) => {
   return {
     type: "UPDATE_ID",

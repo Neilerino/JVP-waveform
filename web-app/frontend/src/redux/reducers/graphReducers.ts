@@ -22,12 +22,14 @@ export const graphReducer = (
     newData.forEach((dataPoint: any) => {
       dataUpdate = {
         ...dataUpdate,
-        x: dataUpdate.x.concat([dataPoint.time]),
-        y: dataUpdate.y.concat([dataPoint.value])
+        x: dataUpdate.x.concat([dataPoint.x]),
+        y: dataUpdate.y.concat([dataPoint.y])
       };
     });
     return dataUpdate;
     // return { ...data, x: data.x.concat([time]), y: data.y.concat([value]) };
+  } else if (type === "RESET_GRAPH") {
+    return initialState();
   }
   return data;
 };
