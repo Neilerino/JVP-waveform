@@ -7,12 +7,18 @@ import FreqBox from "../../components/pageContent/frequency/freqBox";
 import MovingAverage from "../../components/pageContent/movingAverage/movingAverage";
 import typedUseSelector from "../../redux/reduxInterfaces";
 import Plot from "react-plotly.js";
+import { PlotData } from "plotly.js";
 
 // Note logic for changing layout based on how many points there are
 // can be done here.
-export const makePlotlyLayout = (title: string, datarevision: number) => ({
+export const makePlotlyLayout = (
+  title: string,
+  datarevision: number,
+  yaxis?: object
+) => ({
   title,
-  datarevision
+  datarevision,
+  yaxis
 });
 
 const dataCollection: React.FC = () => {
@@ -24,14 +30,28 @@ const dataCollection: React.FC = () => {
     (state: { graphData: any }) => state.graphData
   );
 
+  const getUpdatedGraphData = () => {
+    const x = graphData.x;
+    const y = graphData.y;
+
+    return {
+      x: x.slice(x.length - 300 * 0.75),
+      y: y.slice(y.length - 300 * 0.75),
+      type: "scatter"
+    } as any;
+  };
+
   return (
     <>
       <div className={styles.graphBackground}>
         <Plot
-          data={[graphData]}
+          data={[getUpdatedGraphData()]}
           layout={makePlotlyLayout(
             "Jugular Venous Pressure Information",
-            graphData.x.length
+            graphData.x.length,
+            {
+              range: [0, 5000]
+            }
           )}
           revision={graphData.x.length}
           config={{ scrollZoom: true }}

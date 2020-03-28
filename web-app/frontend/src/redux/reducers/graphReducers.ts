@@ -27,7 +27,6 @@ export const graphReducer = (
       };
     });
     return dataUpdate;
-    // return { ...data, x: data.x.concat([time]), y: data.y.concat([value]) };
   } else if (type === "RESET_GRAPH") {
     return initialState();
   }
