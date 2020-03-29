@@ -1,0 +1,19 @@
+.card {
+  display: flex;
+  padding: 2em 6em;
+  background-color: #486f84;
+  font-size: 1.5em;
+  font-family: sans-serif;
+  text-align: center;
+  color: white;
+  border: solid black;
+  border-radius: 0.12em;
+  border-width: 0.06em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #2f4957;
+  }
+}
