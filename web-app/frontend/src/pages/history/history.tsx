@@ -6,6 +6,7 @@ import typedUseSelector from "../../redux/reduxInterfaces";
 import TitleBox from "../../components/pageContent/titleBox/titleBox";
 import { makePlotlyLayout } from "../dataColleciton/dataCollection";
 import { PlotData } from "plotly.js";
+import { tourSelectors } from "../../helpTour";
 
 const initialGraphState = () => {
   return {
@@ -77,7 +78,10 @@ const History: React.FC = () => {
         revision={graphData.x.length}
         config={{ scrollZoom: true }}
       />
-      <div className={styles.cardContainer}>
+      <div
+        className={styles.cardContainer}
+        data-tut={tourSelectors.pastCollections}
+      >
         <TitleBox text="Past Collections" />
         {cardIds.map(value => {
           return (

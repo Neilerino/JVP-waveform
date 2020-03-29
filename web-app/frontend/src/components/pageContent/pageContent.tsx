@@ -3,6 +3,8 @@ import SideBar from "./sideBar/sideBar";
 import styles from "./pageContent.module.scss";
 import DataCollection from "../../pages/dataColleciton/dataCollection";
 import History from "../../pages/history/history";
+import Tour from "reactour";
+import tourConfig from "../../helpTour";
 
 export const pages = {
   history: "history",
@@ -11,6 +13,7 @@ export const pages = {
 
 const PageContent: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<any | any>(pages.dataCapture);
+  const [isInTour, setIsInTour] = useState<boolean>(false);
 
   const getCurrentPage = () => {
     switch (currentPage) {
@@ -24,10 +27,25 @@ const PageContent: React.FC = () => {
   };
 
   return (
-    <div className={styles.wrapper}>
-      <SideBar router={setCurrentPage} currentPage={currentPage} />
-      {getCurrentPage()}
-    </div>
+    <>
+      <div className={styles.wrapper}>
+        <SideBar
+          router={setCurrentPage}
+          currentPage={currentPage}
+          launchTour={() => {
+            setIsInTour(true);
+          }}
+        />
+        {getCurrentPage()}
+      </div>
+      <Tour
+        isOpen={isInTour}
+        steps={tourConfig}
+        onRequestClose={() => {
+          setIsInTour(false);
+        }}
+      />
+    </>
   );
 };
 

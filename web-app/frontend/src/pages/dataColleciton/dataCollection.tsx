@@ -7,7 +7,7 @@ import FreqBox from "../../components/pageContent/frequency/freqBox";
 import MovingAverage from "../../components/pageContent/movingAverage/movingAverage";
 import typedUseSelector from "../../redux/reduxInterfaces";
 import Plot from "react-plotly.js";
-import { PlotData } from "plotly.js";
+import { tourSelectors } from "../../helpTour";
 
 // Note logic for changing layout based on how many points there are
 // can be done here.
@@ -59,16 +59,25 @@ const dataCollection: React.FC = () => {
       </div>
       <div className={styles.microprocessorInformation}>
         <TitleBox text="Data Collection" />
-        <StatsBox collecting={collecting} />
 
-        <TitleBox text="Frequency" />
-        <FreqBox />
+        <span data-tut={tourSelectors.timer}>
+          <StatsBox collecting={collecting} />
+        </span>
 
-        <TitleBox text="Digital Potentiometer" />
-        <GainBox collecting={collecting} />
+        <span data-tut={tourSelectors.frequency}>
+          <TitleBox text="Frequency" />
+          <FreqBox />
+        </span>
 
-        <TitleBox text="Moving Average Filter" />
-        <MovingAverage />
+        <span data-tut={tourSelectors.potentiometer}>
+          <TitleBox text="Digital Potentiometer" />
+          <GainBox collecting={collecting} />
+        </span>
+
+        <span data-tut={tourSelectors.movingAverage}>
+          <TitleBox text="Moving Average Filter" />
+          <MovingAverage />
+        </span>
       </div>
     </>
   );

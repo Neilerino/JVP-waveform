@@ -4,13 +4,19 @@ import typedUseSelector from "../../../redux/reduxInterfaces";
 import SideBarButton from "../sideBarButton/sideBarButton";
 import classNames from "classnames";
 import { pages } from "../pageContent";
+import { tourSelectors } from "../../../helpTour";
 
 interface SideBarProps extends React.Props<any> {
   router: any;
   currentPage: string;
+  launchTour: any;
 }
 
-const SideBar: React.FC<SideBarProps> = ({ router, currentPage }) => {
+const SideBar: React.FC<SideBarProps> = ({
+  router,
+  currentPage,
+  launchTour
+}) => {
   const display = typedUseSelector(
     (state: { displaySideBar: boolean }) => state.displaySideBar
   );
@@ -21,7 +27,10 @@ const SideBar: React.FC<SideBarProps> = ({ router, currentPage }) => {
       router(
         currentPage === pages.dataCapture ? pages.history : pages.dataCapture
       );
-    }
+    },
+    tourSelector: pages.dataCapture
+      ? tourSelectors.history
+      : tourSelectors.dataCollection
   };
 
   return (
@@ -29,10 +38,19 @@ const SideBar: React.FC<SideBarProps> = ({ router, currentPage }) => {
       <SideBarButton
         text={historyOrDataCapture.text}
         onClick={historyOrDataCapture.onClick}
+        tourSelector={tourSelectors.history}
       />
-      <SideBarButton text="Save Data" onClick={() => {}} />
-      <SideBarButton text="Generate CSV" onClick={() => {}} />
-      <SideBarButton text="Help" onClick={() => {}} />
+      <SideBarButton
+        tourSelector={tourSelectors.saveData}
+        text="Save Data"
+        onClick={() => {}}
+      />
+      <SideBarButton
+        text="Generate CSV"
+        onClick={() => {}}
+        tourSelector={tourSelectors.generateCsv}
+      />
+      <SideBarButton text="Help" onClick={launchTour} />
     </div>
   );
 };
