@@ -14,44 +14,32 @@ export const tourSelectors = {
 
 const tourConfig = [
   {
-    selector: `[data-tut=${tourSelectors.frequency}]`,
-    content: ``
+    selector: `[data-tut=${tourSelectors.timer}]`,
+    content: `Start and stop data collection from this panel`
   },
   {
-    selector: `[data-tut=${tourSelectors.timer}]`,
-    content: ``
+    selector: `[data-tut=${tourSelectors.frequency}]`,
+    content: `Modify the sampling frequency from this panel`
   },
   {
     selector: `[data-tut=${tourSelectors.potentiometer}]`,
-    content: ``
+    content: `Modify the gain of the device from this panel`
   },
   {
     selector: `[data-tut=${tourSelectors.movingAverage}]`,
-    content: ``
+    content: `Enable or disable the moving average filter and the filter's width from this panel`
   },
   {
     selector: `[data-tut=${tourSelectors.generateCsv}]`,
-    content: ``
-  },
-  {
-    selector: `[data-tut=${tourSelectors.generateCsv}]`,
-    content: ``
+    content: `Click this button to generate a CSV file of the current graph data`
   },
   {
     selector: `[data-tut=${tourSelectors.saveData}]`,
-    content: ``
-  },
-  {
-    selector: `[data-tut=${tourSelectors.dataCollection}]`,
-    content: ``
+    content: `Click this button to save the current recording to view it later on`
   },
   {
     selector: `[data-tut=${tourSelectors.history}]`,
-    content: ""
-  },
-  {
-    selector: `[data-tut=${tourSelectors.pastCollections}]`,
-    content: ``
+    content: `Click this button to view previously saved data collections`
   }
 ];
 

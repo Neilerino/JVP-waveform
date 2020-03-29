@@ -24,22 +24,23 @@ export const graphReducer = (
 ) => {
   const { UPDATE, RESET } = graphActions;
   switch (type) {
-  case UPDATE: {
-    let dataUpdate = { ...data };
-    newData.forEach((dataPoint: any) => {
-      dataUpdate = {
-        ...dataUpdate,
-        x: dataUpdate.x.concat([dataPoint.x]),
-        y: dataUpdate.y.concat([dataPoint.y])
-      };
-    });
-    return dataUpdate;
-  } 
-  case RESET: {
-    return initialState();
-  }
-  default: {
-    return data;
+    case UPDATE: {
+      let dataUpdate = { ...data };
+      newData.forEach((dataPoint: any) => {
+        dataUpdate = {
+          ...dataUpdate,
+          x: dataUpdate.x.concat([dataPoint.x]),
+          y: dataUpdate.y.concat([dataPoint.y])
+        };
+      });
+      return dataUpdate;
+    }
+    case RESET: {
+      return initialState();
+    }
+    default: {
+      return data;
+    }
   }
 };
 
