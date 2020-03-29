@@ -13,11 +13,18 @@ const initialState = () => {
   };
 };
 
+const graphActions = {
+  UPDATE: "UPDATE_GRAPH",
+  RESET: "RESET_GRAPH"
+};
+
 export const graphReducer = (
   data: any = initialState(),
   { data: newData, type }: any
 ) => {
-  if (type === "UPDATE_GRAPH") {
+  const { UPDATE, RESET } = graphActions;
+  switch (type) {
+  case UPDATE: {
     let dataUpdate = { ...data };
     newData.forEach((dataPoint: any) => {
       dataUpdate = {
@@ -27,10 +34,13 @@ export const graphReducer = (
       };
     });
     return dataUpdate;
-  } else if (type === "RESET_GRAPH") {
+  } 
+  case RESET: {
     return initialState();
   }
-  return data;
+  default: {
+    return data;
+  }
 };
 
 export const graphIdReducer = (

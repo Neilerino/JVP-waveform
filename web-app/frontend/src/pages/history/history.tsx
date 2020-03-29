@@ -32,11 +32,11 @@ const bundleGraph = (graphObject: object[]) => {
 };
 
 const History: React.FC = () => {
-  const [ids, updateIds] = useState([0]);
+  const [cardIds, updateIds] = useState([0]);
 
   const [graphData, updateGraph] = useState(initialGraphState() as any);
 
-  const getData = async () => {
+  const getCardData = async () => {
     const responseData = await fetch("http://localhost:4000/history/GET/ids", {
       method: "GET",
       mode: "cors",
@@ -47,21 +47,24 @@ const History: React.FC = () => {
     updateIds(responseData);
   };
 
-  useEffect(() => {
-    getData();
-  }, []);
-
   const handleCardClick = async (id: number) => {
-    const data = await fetch(`http://localhost:4000/history/GET/${id}/data`, {
-      method: "GET",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json"
+    const cardData = await fetch(
+      `http://localhost:4000/history/GET/${id}/data`,
+      {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json"
+        }
       }
-    }).then(response => response.json());
-    const graph = bundleGraph(data);
+    ).then(response => response.json());
+    const graph = bundleGraph(cardData);
     updateGraph(graph);
   };
+
+  useEffect(() => {
+    getCardData();
+  }, []);
 
   return (
     <>
@@ -76,7 +79,7 @@ const History: React.FC = () => {
       />
       <div className={styles.cardContainer}>
         <TitleBox text="Past Collections" />
-        {ids.map(value => {
+        {cardIds.map(value => {
           return (
             <Card
               title={"Sample Data Set" + value}
